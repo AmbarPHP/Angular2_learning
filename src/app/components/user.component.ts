@@ -2,59 +2,10 @@ import { Component } from '@angular/core';
 import { PostService} from '../services/post.service';
 
 @Component({
-  selector: 'user',
-  template: `<h1>Hello </h1>
-<h1> Name {{name}}</h1>
-<h1> Email: {{email}}</h1>
-<h1> Address: {{address.street}} {{address.city}}, {{address.state }}</h1>
-<h1> Hobbies: {{hobbies}}</h1>
-
-<button (click)="toggleHobbies()"> {{showHobbies?"Hide Hobbies":"Show Hobbies"}}</button>
-
-<div *ngIf="showHobbies">
-	<ul>
-		<li *ngFor="let hobby of hobbies; let i=index">
-		{{hobby}}  <button (click)="deleteHobby(i)" > X</button> </li>  
-	</ul>
- </div>
-
- <hr />
-
- <form (submit)="addHobby(hobby.value)">
- 	<label for="">Add Hobbie:</label><br />
- 	<input type="text" #hobby /><br />
- </form>
-
-<hr />
-<h3>Edit User</h3>
-<form action="">
-	<label for="name">Name</label>
-	<input type="text" name="name" [(ngModel)]="name" /><br />
-	<label for="email">Email:</label>
-	<input type="text" name=email [(ngModel)]="email"/><br />
-	<label for="address.street">Street:</label>
-	<input type="text" name=address.street [(ngModel)]="address.street"/> <br />
-	<label for="address.city">City</label>
-	<input type="text" name=address.city [(ngModel)]="address.city"/><br />
-	<label for="address.state">State:</label>
-	<input type="text" name=address.state [(ngModel)]="address.state"/><br />
-
-</form>
-<hr />
-
-<h3> Post</h3>
-<button (click)="togglePosts()">Show Posts</button>
-<div *ngIf="showPosts">
-	<ul>
-		<li *ngFor="let post of posts; let i=index">
-		<button (click)="deletePost(i)" >X</button> 
-		{{post.id }}  
-		<b>title: {{post.title}}</b>, <br /> {{post.body}} <br /> </li>  
-	</ul>
- </div>
-
-`,
-providers:[PostService];
+	moduleId : module.id,
+    selector: 'user',
+    templateUrl: 'user.component.html',
+	providers: [PostService]
 })
 export class UserComponent  { 
 		
