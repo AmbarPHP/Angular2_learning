@@ -40,16 +40,31 @@ import { PostService} from '../services/post.service';
 	<input type="text" name=address.state [(ngModel)]="address.state"/><br />
 
 </form>
+<hr />
+
+<h3> Post</h3>
+<button (click)="togglePosts()">Show Posts</button>
+<div *ngIf="showPosts">
+	<ul>
+		<li *ngFor="let post of posts; let i=index">
+		<button (click)="deletePost(i)" >X</button> 
+		{{post.id }}  
+		<b>title: {{post.title}}</b>, <br /> {{post.body}} <br /> </li>  
+	</ul>
+ </div>
+
 `,
 providers:[PostService];
 })
 export class UserComponent  { 
 		
-	 name : string;
+	name : string;
 	email :string;
 	address : address;
 	hobbies: string[];
 	showHobbies: boolean;
+	posts: Posts [];
+	showPosts:boolean;
 
 	 constructor (private postService: PostService) {
 	 	console.log("hola marina");
@@ -62,12 +77,16 @@ export class UserComponent  {
 		}
 		this.hobbies= ["Sports", "Music", "Movies"];
 		this.showHobbies= false;
+		this.showPosts= false;
 		
 		//call the function, return a observable so, subscribe
 		this.postService.getPost().subscribe( post=>{
-
-			console.log(post);
+			//console.log(post);
+			//como from de observable fron the service
+			this.posts = post;
 		});
+
+
 
 	 }
 	 
@@ -80,19 +99,41 @@ export class UserComponent  {
 	 	}
 	 	
 	 }
-
 	 addHobby(hobby){
 	 	console.log(hobby);
 	 	this.hobbies.push(hobby);
 	 }
-
 	 deleteHobby(i){
 	 	this.hobbies.splice(i,1);
 	 }
+
+	 togglePosts(){
+	 	if(this.showPosts==true){
+	 		this.showPosts=false;
+	 	}
+	 	else{
+	 		this.showPosts=true;	
+	 	}
+	 	
+	 }
+
+	 deletePost(i){
+	 	this.posts.splice(i,1);
+	 }
+
+	 
+
+	 
 }
 
 interface address{
 	street: string;
 	city:string;
 	state:string;
+}
+
+interface Posts{
+	id: number;
+	title: string;
+	body: string;
 }
